@@ -34,10 +34,10 @@ class NotebookMeta(type):
 
 class Notebook(metaclass=NotebookMeta):
     def __init__(self):
-        self.notes: list[Note] = []
+        self.__notes: list[Note] = []
 
     def add_note(self, note: Note):
-        print(note)
+        self.__notes.append(note)
 
     def delete_note(self, note: Note):
         pass
@@ -46,14 +46,4 @@ class Notebook(metaclass=NotebookMeta):
         pass
 
     def notes(self):
-        pass
-
-
-def main():
-    note = SimpleNote("дз", "номер 123", datetime.datetime.now(), True)
-    notebook = Notebook()
-    notebook.add_note(note)
-
-
-if __name__ == "__main__":
-    main()
+        return self.__notes
