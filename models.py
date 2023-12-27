@@ -16,9 +16,14 @@ class SimpleNote(Note):
         self.important = important
 
     def __str__(self):
-        msg = f'{self.title}\n{self.text}\nДата создания: {self.creation_date}\n'
-        if self.important:
-            msg += "Важно!"
+        msg = f'''
+==============
+{self.title}
+{self.text}
+Дата создания: {self.creation_date}
+{'Важно!' if self.important else ''}
+==============
+'''
         return msg
 
 
