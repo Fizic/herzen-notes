@@ -2,7 +2,7 @@
 import argparse
 import datetime
 
-from models import Notebook, SimpleNote
+from models import Notebook, SimpleNote, EmailSender
 
 
 def add_note(notebook: Notebook):
@@ -30,6 +30,7 @@ def notes(notebook):
 
 
 def main():
+    # parse args
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
@@ -44,10 +45,14 @@ def main():
 
     notes_parser = subparsers.add_parser('notes')
     notes_parser.set_defaults(action=notes)
-
-    notebook = Notebook()
-
     args = parser.parse_args()
+
+    # prepare objects
+    notebook = Notebook()
+    email_sender = EmailSender()
+    notebook.attach(email_sender)
+
+    # run action
     args.action(notebook)
 
 
